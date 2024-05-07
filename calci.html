@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #calculator {
+            width: 300px;
+            height: 500px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px, rgba(0, 0, 0, 0.22) 0px 5px 12px;
+            border-radius: 20px;
+            margin: auto;
+        }
+        #display {
+            display: flex;
+            justify-content: end;
+            padding: 10px;
+            font-size: 30px;
+            font-weight: bold;
+            border-radius: 12px;
+            height: 120px;
+            width: auto;
+            overflow: hidden;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px, rgba(0, 0, 0, 0.22) 0px 5px 12px;
+        }
+        #keys {
+            padding-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 80px);
+            gap: 3px;
+        }
+        #keys > div {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            font-weight: bold;
+            border-radius: 15px;
+        }
+        #keys > div:hover {
+            cursor: pointer;
+            background-color: rgb(59, 245, 186);
+            transition-duration: 1s;
+        }
+        .black {
+            background-color: black;
+            color: white;
+        }
+        #keys > .black:hover {
+            background-color: red;
+            transition-duration: 0.6s;
+        }
+        .red {
+            background-color: red;
+            color: whitesmoke;
+        }
+        #hello {
+            position: relative;
+            top: -20px;
+            left: 0px;
+            font-weight: bold;
+            color: #333;
+        }
+        #hi {
+            position: relative;
+       top: 50px;
+            font-weight: bold;
+            color: #823232;
+        }
+    </style>
+</head>
+<body>
+<center><h1>Calculator</h1></center>
+<div id="calculator">
+    <div id="display">
+        <div class="output">
+            <p id="hello"></p>
+            <p id="hi">0</p>
+        </div>
+    </div>
+    <div id="keys">  
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div class="black">+</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div class="black">-</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div class="black">*</div>
+        <div>0</div>
+        <div class="red">C</div>
+        <div class="black">=</div>
+        <div class="black">/</div>
+    </div>
+</div>
+<script>
+    let keys = document.querySelectorAll("#keys > div");  
+    let bag = "";
+
+    for (let i = 0; i < keys.length; i++) {
+        keys[i].addEventListener("click", mycalc);
+    }
+
+    function mycalc() {
+        let expression = document.querySelector("#hello");
+        console.log("expression ",expression.innerText);
+        let output = document.querySelector("#hi");
+        let target = event.target.innerText;
+        console.log("target ",target);
+        if (target === "C") {
+            bag = "";
+            output.innerText="0";
+            expression.innerText="";
+        } else if (target ==="=") {
+          let result= eval(bag);
+            output.innerText = result;
+          //  bag=output.innerText; 
+          expression.innerText="";         
+         
+        } else {
+            bag += target;
+            expression.innerText = bag;
+        }
+
+    }
+</script>
+</body>
+</html>
